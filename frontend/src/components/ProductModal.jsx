@@ -123,7 +123,7 @@ const ProductModal = ({ product, onClose }) => {
               </div>
 
               <p className="text-xs text-gray-400 mt-4 text-center">
-                Free delivery within Uganda • 100% Authentic Products
+                Free delivery within DRC • 100% Authentic Products
               </p>
             </div>
           </div>
