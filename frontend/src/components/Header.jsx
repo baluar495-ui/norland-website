@@ -1,4 +1,4 @@
-// frontend/src/components/Header.jsx - With Functional Cart
+// frontend/src/components/Header.jsx - Updated navigation
 import React, { useState, useEffect } from 'react';
 import logo from '../images/NorlandLogo.jpg';
 
@@ -17,15 +17,26 @@ const Header = () => {
     return () => window.removeEventListener('cartUpdated', updateCartCount);
   }, []);
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const goToCart = () => {
     window.location.href = '/cart';
+  };
+
+  const goHome = () => {
+    window.location.href = '/';
   };
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo and Brand Name */}
-        <a href="/" className="flex items-center space-x-3">
+        <button onClick={goHome} className="flex items-center space-x-3">
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg overflow-hidden shadow-sm flex-shrink-0 bg-white border border-gray-200">
             <img 
               src={logo} 
@@ -34,14 +45,14 @@ const Header = () => {
             />
           </div>
           <span className="text-xl md:text-2xl font-bold text-green-700">Norland DRC</span>
-        </a>
+        </button>
 
         {/* Navigation Links - Desktop */}
         <nav className="hidden md:flex space-x-8">
-          <a href="/" className="text-gray-700 hover:text-green-600 font-medium">Home</a>
-          <a href="#products" className="text-gray-700 hover:text-green-600 font-medium">Products</a>
-          <a href="#benefits" className="text-gray-700 hover:text-green-600 font-medium">Benefits</a>
-          <a href="#contact" className="text-gray-700 hover:text-green-600 font-medium">Contact</a>
+          <button onClick={goHome} className="text-gray-700 hover:text-green-600 font-medium">Home</button>
+          <button onClick={() => scrollToSection('products')} className="text-gray-700 hover:text-green-600 font-medium">Products</button>
+          <button onClick={() => scrollToSection('benefits')} className="text-gray-700 hover:text-green-600 font-medium">Benefits</button>
+          <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-green-600 font-medium">Contact</button>
         </nav>
 
         {/* Call to Action & Cart Buttons */}
@@ -62,12 +73,12 @@ const Header = () => {
             )}
           </button>
 
-          <a 
-            href="#consultation" 
+          <button 
+            onClick={() => scrollToSection('contact')}
             className="bg-green-600 hover:bg-green-700 text-white px-3 md:px-4 py-2 rounded-lg font-medium transition-colors text-xs md:text-sm"
           >
             Free Consultation
-          </a>
+          </button>
           <button className="md:hidden text-gray-700 hover:text-green-600">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

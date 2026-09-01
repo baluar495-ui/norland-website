@@ -4,6 +4,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import OrderTrackingPage from './pages/OrderTrackingPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -11,8 +13,13 @@ function App() {
   useEffect(() => {
     const handleNavigation = () => {
       const path = window.location.pathname;
+      
       if (path === '/cart') {
         setCurrentPage('cart');
+      } else if (path === '/checkout') {
+        setCurrentPage('checkout');
+      } else if (path === '/order-tracking' || path.startsWith('/order-tracking?')) {
+        setCurrentPage('order-tracking');
       } else {
         setCurrentPage('home');
       }
@@ -25,10 +32,16 @@ function App() {
   }, []);
 
   const renderPage = () => {
-    if (currentPage === 'cart') {
-      return <CartPage />;
+    switch(currentPage) {
+      case 'cart':
+        return <CartPage />;
+      case 'checkout':
+        return <CheckoutPage />;
+      case 'order-tracking':
+        return <OrderTrackingPage />;
+      default:
+        return <HomePage />;
     }
-    return <HomePage />;
   };
 
   return (

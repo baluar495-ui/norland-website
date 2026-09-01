@@ -1,10 +1,11 @@
-// frontend/src/pages/HomePage.jsx - 50 lines
+// frontend/src/pages/HomePage.jsx
 import React, { useState, useEffect } from 'react';
-import ProductCard from '../components/ProductCard';
 import ImageCarousel from '../components/ImageCarousel';
 import TrustBadges from '../components/TrustBadges';
 import WhyChooseNorland from '../components/WhyChooseNorland';
 import PickedForYou from '../components/PickedForYou';
+import ProductsSection from '../components/ProductsSection';
+import GetInTouch from '../components/GetInTouch';
 import { fetchProducts } from '../services/api';
 
 const HomePage = () => {
@@ -13,19 +14,22 @@ const HomePage = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const data = await fetchProducts();
-      setProducts(data);
-      setLoading(false);
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     getProducts();
   }, []);
 
   return (
     <div>
-      {/* Full-width Carousel */}
       <ImageCarousel />
       
-      {/* Hero Section */}
       <section className="text-center py-12 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 leading-tight">
@@ -38,25 +42,18 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Trust Badges Section */}
       <TrustBadges />
-
-      {/* Why Choose Norland Section */}
       <WhyChooseNorland />
-
-      {/* Picked For You Section */}
       <PickedForYou />
 
-      {/* Our Products Section - Title Only for Now */}
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">Our Products</h2>
-        <p className="text-center text-gray-600 mb-8">Targeted solutions for every health need.</p>
-        <div className="text-center py-8 text-gray-500">
-          <p>Products coming soon...</p>
-        </div>
+      <div id="products">
+        <ProductsSection products={products} loading={loading} />
       </div>
+
+      {/* Get In Touch Section */}
+      <GetInTouch />
     </div>
   );
 };
 
-export default HomePage;  // ✅ Only ONE export statement
+export default HomePage;

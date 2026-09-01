@@ -59,7 +59,7 @@ const CartPage = () => {
   };
 
   const handleCheckout = () => {
-    alert('Checkout coming soon!');
+    window.location.href = '/checkout';
   };
 
   if (cartItems.length === 0) {

@@ -1,9 +1,9 @@
-// frontend/src/components/PickedForYou.jsx - 120 lines
+// frontend/src/components/PickedForYou.jsx - 95 lines
 import React, { useState, useEffect } from 'react';
-import PickedProductCard from './PickedProductCard';
 import ProductModal from './ProductModal';
 import ProductTabs from './ProductTabs';
-import ProductNavigation from './ProductNavigation';
+import ProductCarousel from './ProductCarousel';
+import ProductDots from './ProductDots';
 import { fetchFeaturedProducts } from '../services/api';
 
 const PickedForYou = () => {
@@ -14,7 +14,6 @@ const PickedForYou = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load and group products
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -36,7 +35,6 @@ const PickedForYou = () => {
     loadProducts();
   }, []);
 
-  // Auto-scroll
   useEffect(() => {
     if (tags.length === 0) return;
     const currentProducts = groupedProducts[tags[currentTagIndex]] || [];
@@ -123,22 +121,20 @@ const PickedForYou = () => {
           />
         </div>
 
-        <div className="relative">
-          {currentProduct && (
-            <PickedProductCard 
-              product={currentProduct} 
-              onLearnMore={openModal} 
-            />
-          )}
-          
-          <ProductNavigation 
-            totalProducts={currentProducts.length}
-            currentIndex={currentProductIndex}
-            onPrevious={goToPrevious}
-            onNext={goToNext}
-            onDotClick={setCurrentProductIndex}
-          />
-        </div>
+        <ProductCarousel 
+          product={currentProduct}
+          totalProducts={currentProducts.length}
+          currentIndex={currentProductIndex}
+          onPrevious={goToPrevious}
+          onNext={goToNext}
+          onLearnMore={openModal}
+        />
+
+        <ProductDots 
+          total={currentProducts.length}
+          currentIndex={currentProductIndex}
+          onDotClick={setCurrentProductIndex}
+        />
 
         <div className="text-center mt-8">
           <a href="#" className="text-green-600 hover:text-green-700 font-medium inline-flex items-center gap-2">

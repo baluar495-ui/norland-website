@@ -1,4 +1,4 @@
-// frontend/src/components/WhyChooseNorland.jsx - 48 lines
+// frontend/src/components/WhyChooseNorland.jsx - Add id to container
 import React from 'react';
 
 const WhyChooseNorland = () => {
@@ -26,7 +26,7 @@ const WhyChooseNorland = () => {
   ];
 
   return (
-    <div className="py-12 bg-white">
+    <div id="benefits" className="py-12 bg-white">
       <div className="container mx-auto px-4">
         {/* Why Choose Norland Heading */}
         <div className="text-center mb-3">
