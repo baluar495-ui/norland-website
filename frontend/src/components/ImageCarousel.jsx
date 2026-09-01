@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import slide1 from '../images/Slide1.jpg';
 import slide2 from '../images/Slide2.jpg';
-import slide3 from '../images/slide3.jpg';
+import slide3 from '../images/Slide3.jpg';
 import slide4 from '../images/Slide4.jpg';
 
 
