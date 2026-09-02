@@ -12,7 +12,8 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
   'https://norland-website-1w3m.vercel.app',
-  'https://norland-website.vercel.app'
+  'https://norland-website.vercel.app',
+  'https://norland-website-3bw6-eight.vercel.app'  // ← ADD YOUR NEW URL HERE
 ];
 
 app.use(cors({
@@ -20,6 +21,7 @@ app.use(cors({
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('❌ CORS blocked:', origin); // Add this for debugging
       callback(new Error('Not allowed by CORS'));
     }
   }
