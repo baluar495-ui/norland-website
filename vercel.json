@@ -1,0 +1,9 @@
+{
+    "outputDirectory": "frontend/dist",
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/frontend/dist/$1"
+      }
+    ]
+  }
