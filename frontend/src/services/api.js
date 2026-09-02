@@ -1,17 +1,20 @@
 // frontend/src/services/api.js
-const API_BASE_URL = import.meta.env.API_URL || import.meta.env.VITE_API_URL || 'https://norland-website.onrender.com/api';
+const API_BASE_URL = 'https://norland-website.onrender.com/api';
 
-console.log('🔍 API URL:', API_BASE_URL); // For debugging
+console.log('🔍 API URL:', API_BASE_URL); // Debug log
 
 export const fetchProducts = async () => {
     try {
         const response = await fetch(`${API_BASE_URL}/products`);
+        console.log('📦 Products response status:', response.status);
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }
-        return await response.json();
+        const data = await response.json();
+        console.log('✅ Products loaded:', data.length);
+        return data;
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('❌ Error fetching products:', error);
         return [];
     }
 };
@@ -61,7 +64,9 @@ export const fetchCategories = async () => {
         if (!response.ok) {
             throw new Error('Failed to fetch categories');
         }
-        return await response.json();
+        const data = await response.json();
+        console.log('📦 Categories loaded:', data);
+        return data;
     } catch (error) {
         console.error('Error fetching categories:', error);
         return [];
