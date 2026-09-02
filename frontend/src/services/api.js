@@ -1,5 +1,5 @@
 // frontend/src/services/api.js
-const API_BASE_URL = import.meta.env.API_URL || import.meta.env.VITE_API_URL || 'https://norland-backend.onrender.com/api';
+const API_BASE_URL = import.meta.env.API_URL || import.meta.env.VITE_API_URL || 'https://norland-website.onrender.com/api';
 
 console.log('🔍 API URL:', API_BASE_URL); // For debugging
 
